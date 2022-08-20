@@ -3,25 +3,25 @@ import React from "react";
 // reactstrap components
 import {
   Button,
-  NavItem,
-  NavLink,
-  Nav,
-  TabContent,
-  TabPane,
+  // NavItem,
+  // NavLink,
+  // Nav,
+  // TabContent,
+  // TabPane,
   Container,
-  Row,
-  Col,
-  UncontrolledTooltip,
-  CardFooter
+  // Row,
+  // Col,
+  // UncontrolledTooltip,
+  // CardFooter
 } from "reactstrap";
 
 // core components
-import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
+// import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
-import DefaultFooter from "components/Footers/DefaultFooter.js";
+// import DefaultFooter from "components/Footers/DefaultFooter.js";
 
 function ProfilePage() {
-  const [pills, setPills] = React.useState("2");
+  // const [pills, setPills] = React.useState("2");
   React.useEffect(() => {
     document.body.classList.add("profile-page");
     document.body.classList.add("sidebar-collapse");
@@ -42,21 +42,20 @@ function ProfilePage() {
           <Container>
             <h3 className="title">About me</h3>
             <h5 className="description">
-              A 4th year student, Pranit — studying in National
-              Institute Of Technology Calicut. Going to join SAP Labs India pretty
-              soon.
+              A 4th year student, Pranit — studying in National Institute Of
+              Technology Calicut. Going to join SAP Labs India pretty soon.
             </h5>
             <div className="text-center">
-                  <Button
-                    className="btn-round mr-1 btn-round"
-                    color="info"
-                    href="https://drive.google.com/file/d/1j1akWFqIO0GAadFvLcI4tgM9dkOQm5FX/view?usp=sharing"
-                    // onClick={(e) => e.preventDefault()}
-                    size="lg"
-                  >
-                    My Resume
-                  </Button>
-                </div>
+              <Button
+                className="btn-round mr-1 btn-round"
+                color="info"
+                href="https://drive.google.com/file/d/1j1akWFqIO0GAadFvLcI4tgM9dkOQm5FX/view?usp=sharing"
+                // onClick={(e) => e.preventDefault()}
+                size="lg"
+              >
+                My Resume
+              </Button>
+            </div>
             {/* <Button
                 className="btn-round mr-1"
                 color="info"

@@ -1,12 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom"
+// import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 // reactstrap components
 import {
   Button,
   Card,
-  CardHeader,
+  // CardHeader,
   CardBody,
   CardFooter,
   Form,
@@ -15,19 +15,19 @@ import {
   InputGroupText,
   InputGroup,
   Container,
-  Col
+  Col,
 } from "reactstrap";
 
 // core components
-import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
-import TransparentFooter from "components/Footers/TransparentFooter.js";
+// import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
+// import TransparentFooter from "components/Footers/TransparentFooter.js";
 
 function LoginPage() {
-  const history = useHistory()
+  const history = useHistory();
 
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
-  const [info, setInfo] = React.useState({ email: "", password: "" })
+  const [info, setInfo] = React.useState({ email: "", password: "" });
   React.useEffect(() => {
     document.body.classList.add("login-page");
     document.body.classList.add("sidebar-collapse");
@@ -40,25 +40,25 @@ function LoginPage() {
     };
   }, []);
 
-  const handleChange = e => {
-    const { name, value } = e.target
+  const handleChange = (e) => {
+    const { name, value } = e.target;
     setInfo({
-      ...info,//spread operator 
-      [name]: value
-    })
-  }
+      ...info, //spread operator
+      [name]: value,
+    });
+  };
 
   const login = (e) => {
     e.preventDefault();
-    if (info.email != "pranitud@gmail.com" || info.password != "Pranit@mr03") {
-      alert("Wrong Credentials")
+    if (
+      info.email !== "pranitud@gmail.com" ||
+      info.password !== "Pranit@mr03"
+    ) {
+      alert("Wrong Credentials");
+    } else {
+      history.push("/my-page");
     }
-    else {
-      history.push('/my-page')
-
-    }
-  }
-
+  };
 
   return (
     <>
@@ -67,7 +67,7 @@ function LoginPage() {
         <div
           className="page-header-image"
           style={{
-            backgroundImage: "url(" + require("assets/img/login.jpg") + ")"
+            backgroundImage: "url(" + require("assets/img/login.jpg") + ")",
           }}
         ></div>
         <div className="content">
@@ -75,7 +75,6 @@ function LoginPage() {
             <Col className="ml-auto mr-auto" md="4">
               <Card className="card-login card-plain">
                 <Form action="" className="form" method="">
-
                   <CardBody>
                     <InputGroup
                       className={
@@ -114,7 +113,6 @@ function LoginPage() {
                         value={info.password}
                         placeholder="Password..."
                         type="password"
-            
                         onChange={handleChange}
                         onFocus={() => setLastFocus(true)}
                         onBlur={() => setLastFocus(false)}
@@ -142,7 +140,5 @@ function LoginPage() {
     </>
   );
 }
-
-
 
 export default LoginPage;

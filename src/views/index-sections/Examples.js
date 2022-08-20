@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 // reactstrap components
 import { Button, Col, Container, Row } from "reactstrap";
 
@@ -9,7 +9,7 @@ function Examples() {
   return (
     <>
       <div className="section section-examples" data-background-color="black">
-      <Container className="text-center">
+        <Container className="text-center">
           <Row className="justify-content-md-center">
             <Col lg="8" md="12">
               <h2 className="title">Projects</h2>
@@ -20,7 +20,10 @@ function Examples() {
         <Container className="text-center">
           <Row>
             <div className="col">
-              <a href="https://ecstatic-perlman-7b46c0.netlify.app/" target="_blank">
+              <a
+                href="https://ecstatic-perlman-7b46c0.netlify.app/"
+                target="_blank"
+              >
                 <img
                   alt="..."
                   className="img-raised"
