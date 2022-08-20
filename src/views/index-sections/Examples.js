@@ -23,6 +23,7 @@ function Examples() {
               <a
                 href="https://ecstatic-perlman-7b46c0.netlify.app/"
                 target="_blank"
+                rel="noreferrer"
               >
                 <img
                   alt="..."
@@ -40,7 +41,11 @@ function Examples() {
               </Button>
             </div>
             <div className="col">
-              <a href="https://github.com/Pranit4u/GrieSol" target="_blank">
+              <a
+                href="https://github.com/Pranit4u/GrieSol"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <img
                   alt="..."
                   className="img-raised"
