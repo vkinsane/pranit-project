@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { Link } from "react-router-dom";
-import axios from 'axios';
-import Notifications from "./Notifications";
+import React from "react";
+// import { Link } from "react-router-dom";
+import axios from "axios";
+// import Notifications from "./Notifications";
 
 // reactstrap components
 import {
@@ -17,11 +17,10 @@ import {
   InputGroupText,
   InputGroup,
   Container,
-  Row
+  Row,
 } from "reactstrap";
 
 // core components
-
 
 const SignUp = () => {
   const [firstFocus, setFirstFocus] = React.useState(false);
@@ -32,50 +31,53 @@ const SignUp = () => {
     email: "",
     content: "",
     firstName: "",
-    lastName: ""
-  })
+    lastName: "",
+  });
 
-  const handleChange = e => {
-    const { name, value } = e.target
+  const handleChange = (e) => {
+    const { name, value } = e.target;
     setMessage({
-      ...message,//spread operator 
-      [name]: value
-    })
-
-  }
+      ...message, //spread operator
+      [name]: value,
+    });
+  };
   const sendMessage = (e) => {
-
-    if (message.firstName.length === 0 || message.lastName.length == 0 || message.email.length == 0 || message.content.length == 0) {
+    if (
+      message.firstName.length === 0 ||
+      message.lastName.length === 0 ||
+      message.email.length === 0 ||
+      message.content.length === 0
+    ) {
       return;
     }
 
     const obj = {
-      "firstName": message.firstName,
-      "lastName": message.lastName,
-      "email": message.email,
-      "content": message.content
-    }
+      firstName: message.firstName,
+      lastName: message.lastName,
+      email: message.email,
+      content: message.content,
+    };
 
-    axios.post("https://pranit-blog.herokuapp.com/sendMessage/send", obj)
-            .then(res => {
-                const r = res.data.message;
-                switch (r) {
-                    case "1":
-                        alert("Message is sent.")
-                        break;
-                    default:
-                        alert("Something went wrong")
-                        break;
-            
-                }
-            })
-            .catch((e) =>{ 
-                alert("Error in server :(")
-                console.log("error catch ->" + e)
-            })
-    setMessage({email:"",firstName:"",lastName:"", content: ""})
-  }
-  
+    axios
+      .post("https://pranit-blog.herokuapp.com/sendMessage/send", obj)
+      .then((res) => {
+        const r = res.data.message;
+        switch (r) {
+          case "1":
+            alert("Message is sent.");
+            break;
+          default:
+            alert("Something went wrong");
+            break;
+        }
+      })
+      .catch((e) => {
+        alert("Error in server :(");
+        console.log("error catch ->" + e);
+      });
+    setMessage({ email: "", firstName: "", lastName: "", content: "" });
+  };
+
   return (
     <>
       <div
@@ -85,7 +87,7 @@ const SignUp = () => {
           backgroundImage: "url(" + require("assets/img/bg11.jpg") + ")",
           backgroundSize: "cover",
           backgroundPosition: "top center",
-          minHeight: "700px"
+          minHeight: "700px",
         }}
       >
         <Container>
@@ -100,7 +102,10 @@ const SignUp = () => {
                   <InputGroup>
                     <InputGroupAddon>
                       <InputGroupText style={{ paddingRight: 20 }}>
-                        <i className="now-ui-icons location_pin" style={{ marginRight: 15 }}></i>
+                        <i
+                          className="now-ui-icons location_pin"
+                          style={{ marginRight: 15 }}
+                        ></i>
                         Shreeram Nagar Tumsar, MH
                       </InputGroupText>
                     </InputGroupAddon>
@@ -109,7 +114,10 @@ const SignUp = () => {
                   <InputGroup>
                     <InputGroupAddon>
                       <InputGroupText style={{ paddingRight: 20 }}>
-                        <i className="now-ui-icons tech_mobile" style={{ marginRight: 15 }}></i>
+                        <i
+                          className="now-ui-icons tech_mobile"
+                          style={{ marginRight: 15 }}
+                        ></i>
                         9172111984
                       </InputGroupText>
                     </InputGroupAddon>
@@ -118,12 +126,14 @@ const SignUp = () => {
                   <InputGroup>
                     <InputGroupAddon>
                       <InputGroupText style={{ paddingRight: 20 }}>
-                        <i className="now-ui-icons users_single-02" style={{ marginRight: 15 }}></i>
+                        <i
+                          className="now-ui-icons users_single-02"
+                          style={{ marginRight: 15 }}
+                        ></i>
                         pranitud@gmail.com
                       </InputGroupText>
                     </InputGroupAddon>
                   </InputGroup>
-
                 </CardHeader>
 
                 <CardBody>
@@ -225,8 +235,6 @@ const SignUp = () => {
       </div>
     </>
   );
-
-}
-
+};
 
 export default SignUp;

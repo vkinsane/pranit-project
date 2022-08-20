@@ -1,16 +1,11 @@
 import React from "react";
-import axios from 'axios';
-import Switch from "react-bootstrap-switch";
+import axios from "axios";
+// import Switch from "react-bootstrap-switch";
 // plugin that creates slider
-import Slider from "nouislider";
+// import Slider from "nouislider";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 // reactstrap components
-import {
-  Label,
-  FormGroup,
-  Input,
-
-} from "reactstrap";
+import { Label, FormGroup, Input } from "reactstrap";
 
 // reactstrap components
 import {
@@ -32,41 +27,49 @@ import storage from "firebaseConfig";
 
 function Tabs() {
   const [iconPills, setIconPills] = React.useState("1");
-  const [pills, setPills] = React.useState("1");
-  const [messages, setMessages] = React.useState([])
-  const [fetched, setFetched] = React.useState(false)
-  const [info, setInfo] = React.useState({ caption: "", altText: "" ,src: "", type: ""})
+  // const [pills, setPills] = React.useState("1");
+  const [messages, setMessages] = React.useState([]);
+  const [fetched, setFetched] = React.useState(false);
+  const [info, setInfo] = React.useState({
+    caption: "",
+    altText: "",
+    src: "",
+    type: "",
+  });
   const [file, setFile] = React.useState("");
   const [percent, setPercent] = React.useState(0);
 
-  const handleChange = e => {
-    const { name, value } = e.target
+  const handleChange = (e) => {
+    const { name, value } = e.target;
     setInfo({
-      ...info,//spread operator 
-      [name]: value
-    })
-  }
+      ...info, //spread operator
+      [name]: value,
+    });
+  };
 
-  const manageChange = e => {
+  const manageChange = (e) => {
     setFile(e.target.files[0]);
-  }
+  };
 
   const makeChange = (e) => {
-    info['type'] = e.target.value;
-  }
+    info["type"] = e.target.value;
+  };
 
   const uploadToFirebase = () => {
-
-    if (info.altText.length == 0 || info.caption.length == 0 || info.type.length == 0){
+    if (
+      info.altText.length === 0 ||
+      info.caption.length === 0 ||
+      info.type.length === 0
+    ) {
       alert("Please fill all fields!");
-        return;
+      return;
     }
 
     if (!file) {
-        alert("Please upload an image first!");
-        return;
+      alert("Please upload an image first!");
+      return;
     }
-    
+
     const storageRef = ref(storage, `/files/${file.name}`);
 
     // progress can be paused and resumed. It also exposes progress updates.
@@ -74,58 +77,59 @@ function Tabs() {
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-            const percent = Math.round(
-                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            );
+      "state_changed",
+      (snapshot) => {
+        const percent = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
 
-            // update progress
-            setPercent(percent);
-        },
-        (err) => console.log(err),
-        () => {
-            // download url
-            getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-                info['src'] = url;
-                uploadPicture();
-            });
-        }
+        // update progress
+        setPercent(percent);
+      },
+      (err) => console.log(err),
+      () => {
+        // download url
+        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+          info["src"] = url;
+          uploadPicture();
+        });
+      }
     );
   };
 
   const uploadPicture = () => {
-    axios.post("https://pranit-blog.herokuapp.com/addPicture/add", info)
-            .then(res => {
-                const r = res.data.message;
-                switch (r) {
-                    case "1":
-                        alert("Picture is added")
-                        break;
-                    default:
-                        alert("Something went wrong")
-                        break;
-                }
-            })
-            .catch((e) =>{ 
-                alert("Error in server :(")
-                console.log("error catch ->" + e)
-            })
-  }
-
-
+    axios
+      .post("https://pranit-blog.herokuapp.com/addPicture/add", info)
+      .then((res) => {
+        const r = res.data.message;
+        switch (r) {
+          case "1":
+            alert("Picture is added");
+            break;
+          default:
+            alert("Something went wrong");
+            break;
+        }
+      })
+      .catch((e) => {
+        alert("Error in server :(");
+        console.log("error catch ->" + e);
+      });
+  };
 
   const getMessages = async () => {
-    const res = await axios.get('https://pranit-blog.herokuapp.com/sendMessage/get', {
-      params: {
+    const res = await axios.get(
+      "https://pranit-blog.herokuapp.com/sendMessage/get",
+      {
+        params: {},
       }
-    });
-    setFetched(true)
+    );
+    setFetched(true);
     // console.log(res.data)
-    setMessages(res.data)
-  }
+    setMessages(res.data);
+  };
   if (!fetched) {
-    getMessages()
+    getMessages();
   }
 
   return (
@@ -199,17 +203,19 @@ function Tabs() {
                   >
                     <TabPane tabId="iconPills1">
                       <p>
-                        {messages.length === 0 ? "No Messages" :
+                        {messages.length === 0 ? (
+                          "No Messages"
+                        ) : (
                           <ul>
                             {messages.map((msg, index) => {
                               return (
                                 <li key={index}>
-                                  {msg['firstName'] + "->" + msg['content']}
+                                  {msg["firstName"] + "->" + msg["content"]}
                                 </li>
-                              )
+                              );
                             })}
                           </ul>
-                        }
+                        )}
                       </p>
                     </TabPane>
                     <TabPane tabId="iconPills2">
@@ -286,19 +292,25 @@ function Tabs() {
                           type="text"
                         ></Input>
                       </FormGroup>
-                      <input type="file" accept="image/*" onChange={manageChange} />
-                      <button className="btn-neutral btn-round"
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={manageChange}
+                      />
+                      <button
+                        className="btn-neutral btn-round"
                         color="info"
                         onClick={uploadToFirebase}
-                        size="lg">Upload to Firebase</button>
-                        <p>{percent}% done</p>
+                        size="lg"
+                      >
+                        Upload to Firebase
+                      </button>
+                      <p>{percent}% done</p>
                     </TabPane>
-
                   </TabContent>
                 </CardBody>
               </Card>
             </Col>
-
           </Row>
         </Container>
       </div>
